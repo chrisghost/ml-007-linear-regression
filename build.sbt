@@ -8,5 +8,6 @@ scalaVersion := "2.11.1"
 
 libraryDependencies ++= Seq(
   "org.scalanlp" % "breeze_2.10" % "0.9",
+  "org.scalanlp" % "breeze-viz_2.10" % "0.9",
   "org.scalanlp" % "breeze-natives_2.10" % "0.9"
 )

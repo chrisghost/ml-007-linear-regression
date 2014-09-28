@@ -16,7 +16,7 @@ object LinearRegressionSpec extends Specification {
           (1.0f, 1.0f),
           (1.0f, 10.0f)
         ),
-        DenseVector(6.0f, 60.0f)
+        DenseVector(6.0f, 600.0f)
       )
 
       def computeTry(iterations: Int) = {
@@ -36,15 +36,15 @@ object LinearRegressionSpec extends Specification {
         //htest must be_>=(5.0f)
 
         val htest2 = LinearRegression.hypothesis(result, DenseVector(1.0f, 10.0f))
-        println(s"Should have ~60, got $htest2")
+        println(s"Should have ~600, got $htest2")
+
+        val htest3 = LinearRegression.hypothesis(result, DenseVector(1.0f, 100.0f))
+        println(s"Should have ~6000, got $htest3")
 
         //htest2 must be_<=(70.0f)
         //htest2 must be_>=(50.0f)
       }
 
-      computeTry(100)
-      computeTry(1000)
-      computeTry(10000)
       computeTry(100000)
 
 

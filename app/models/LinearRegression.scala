@@ -13,16 +13,18 @@ object LinearRegression {
   def resolve(ts: DenseVector[Float], data: TData[Float], alpha: Float, iterations: Int = 1000) = {
     var thetas = ts
 
-    (1 to iterations).map { iter =>
+    val jvals = (1 to iterations).map { iter =>
       var cnt = 0
       val res = thetas.map { t =>
-        val r = t - alpha * costFunc(thetas, data, cnt)
+        val jRes = costFunc(thetas, data, cnt)
+        val r = t - alpha * jRes
         cnt+=1
-        r
+        (jRes, r)
       }
-      //println("RES = == ", res)
-      thetas = res
+      thetas = res.map(_._2)
+      res.map(_._1).reduce(_+_)
     }
+    //drawGraph(jvals.map(_(0)))
     thetas
   }
 
@@ -48,4 +50,33 @@ object LinearRegression {
 
     (1.0f/tdata.m) * sum
   }
+
+  /*
+  def drawGraph(plots: Seq[Float]) = {
+    import breeze.linalg._
+    import breeze.plot._
+
+    implicit val xv: DomainFunction[Float, Int, Int] = new DomainFunction[Float, Int, Int] {
+      def domain(t: Float): IndexedSeq[Int] = 0 until t.toInt
+      def apply(t: Float, k: Int): Int = (t+k).toInt
+    }
+
+    implicit val xv2: DomainFunction[Int, Int, Int] = new DomainFunction[Int, Int, Int] {
+      def domain(t: Int): IndexedSeq[Int] = 0 until t.toInt
+      def apply(t: Int, k: Int): Int = (t+k).toInt
+    }
+
+
+
+    val f = Figure()
+
+    val p = f.subplot(0)
+    plots.zipWithIndex.map { case(e, i) =>
+      p += plot(i, e, '.')
+    }
+
+    f.saveas("theta.png")
+
+  }
+    */
 }
