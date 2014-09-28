@@ -38,8 +38,9 @@ object LinearRegressionSpec extends Specification {
         val htest2 = LinearRegression.hypothesis(result, DenseVector(1.0f, 10.0f))
         println(s"Should have ~600, got $htest2")
 
-        val htest3 = LinearRegression.hypothesis(result, DenseVector(1.0f, 100.0f))
-        println(s"Should have ~6000, got $htest3")
+        
+        println(s"For param = 5.0f, got ", LinearRegression.hypothesis(result, DenseVector(1.0f, 5.0f)))
+        println(s"For param = 11.0f, got ", LinearRegression.hypothesis(result, DenseVector(1.0f, 11.0f)))
 
         //htest2 must be_<=(70.0f)
         //htest2 must be_>=(50.0f)
