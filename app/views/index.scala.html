@@ -1,7 +1,20 @@
-@(message: String)
+@(thetaData: List[Float])
 
-@main("Welcome to Play") {
+@main("Linear Regression") {
+    <script src="@routes.Assets.at("javascripts/Chart.js")"></script>
+    <script type="text/javascript">
+      var thetaData = {
+        labels: [@thetaData.zipWithIndex.map(_._2).mkString(",")],
+        datasets: [
+          {
+            data: [@thetaData.mkString(",")]
+          }
+        ]
+      }
+    </script>
 
-    @play20.welcome(message)
+    <h1>Theta evolution over iterations</h1>
+    <canvas id="thetachart" width="800" height="800"></canvas>
 
+    <script src="@routes.Assets.at("javascripts/thetaChart.js")"></script>
 }

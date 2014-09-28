@@ -24,8 +24,7 @@ object LinearRegression {
       thetas = res.map(_._2)
       res.map(_._1).reduce(_+_)
     }
-    //drawGraph(jvals.map(_(0)))
-    thetas
+    (thetas, jvals.map(_(0)))
   }
 
   def hypothesis(tethas: DenseVector[Float], x: DenseVector[Float]) : Float = tethas.t * x

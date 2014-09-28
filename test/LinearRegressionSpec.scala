@@ -25,7 +25,7 @@ object LinearRegressionSpec extends Specification {
         println(s"Trying with $iterations iterations")
 
         val thetas = DenseVector(1.0f, 1.0f)
-        val result = LinearRegression.resolve(thetas, tdt, 0.001f, iterations)
+        val (result, thetasProgession) = LinearRegression.resolve(thetas, tdt, 0.001f, iterations)
 
         println(s"thetas = $result")
 
